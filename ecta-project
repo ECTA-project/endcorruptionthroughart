@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="End Corruption Through Art – A modern gallery with a white and gold aesthetic, showcasing artworks that inspire integrity and awareness.">
+  <title>End Corruption Through Art</title>
+  <style>
+    :root {
+      --gold: #d4af37;
+      --white: #ffffff;
+      --gray: #333;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --font: 'Poppins', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background-color: var(--white);
+      color: var(--gray);
+      scroll-behavior: smooth;
+    }
+
+    header {
+      text-align: center;
+      padding: 4rem 1rem;
+      background: linear-gradient(to right, var(--white), #fff8e1);
+      color: var(--gray);
+      box-shadow: 0 4px 10px var(--shadow);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 3rem;
+    }
+
+    .art-card {
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .art-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px var(--shadow);
+    }
+
+    .art-card img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+    }
+
+    .art-info {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .art-info h3 {
+      margin: 0.5rem 0;
+      color: var(--gold);
+      font-size: 1.2rem;
+    }
+
+    .art-info p {
+      margin: 0;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #fffaf0;
+      color: #777;
+      border-top: 1px solid #eee;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>End Corruption Through Art</h1>
+    <p>An aesthetic gallery where creativity exposes truth and art becomes a voice against corruption.</p>
+  </header>
+
+  <section class="gallery">
+    <div class="art-card">
+      <img src="https://via.placeholder.com/400x500?text=Artwork+1" alt="Artwork 1">
+      <div class="art-info">
+        <h3>Truth in Shadows</h3>
+        <p>by L. Santos (2022) – Oil on Canvas</p>
+      </div>
+    </div>
+
+    <div class="art-card">
+      <img src="https://via.placeholder.com/400x600?text=Artwork+2" alt="Artwork 2">
+      <div class="art-info">
+        <h3>Voices of the People</h3>
+        <p>by M. Rivera (2023) – Acrylic</p>
+      </div>
+    </div>
+
+    <div class="art-card">
+      <img src="https://via.placeholder.com/400x400?text=Artwork+3" alt="Artwork 3">
+      <div class="art-info">
+        <h3>Hands of Integrity</h3>
+        <p>by A. Cruz (2021) – Mixed Media</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 End Corruption Through Art – Promoting honesty and awareness through creativity.</p>
+  </footer>
+</body>
+</html>
