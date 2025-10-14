@@ -3,171 +3,144 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="End Corruption Through Art – A modern gallery showcasing artworks that inspire integrity and awareness.">
   <title>End Corruption Through Art</title>
   <style>
-    :root {
-      --gold: #d4af37;
-      --white: #ffffff;
-      --gray: #333;
-      --shadow: rgba(0, 0, 0, 0.1);
-      --font: 'Poppins', sans-serif;
-    }
-
     body {
+      font-family: "Poppins", sans-serif;
+      background-color: #ffffff;
+      color: #333;
       margin: 0;
-      font-family: var(--font);
-      background-color: var(--white);
-      color: var(--gray);
-      scroll-behavior: smooth;
+      padding: 0;
     }
 
     header {
       text-align: center;
-      padding: 4rem 1rem;
-      background: linear-gradient(to right, var(--white), #fff8e1);
-      color: var(--gray);
-      box-shadow: 0 4px 10px var(--shadow);
+      margin-top: 40px;
     }
 
-    header h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-      color: var(--gold);
-      letter-spacing: 1px;
+    h1 {
+      color: #b69b4c; /* goldish */
+      font-size: 2.5em;
+      margin-bottom: 10px;
     }
 
-    header p {
-      font-size: 1.1rem;
-      color: #555;
-      max-width: 700px;
-      margin: 0 auto;
+    p.subtitle {
+      color: #777;
+      font-size: 1em;
     }
 
+    /* Gallery layout */
     .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      padding: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin: 50px auto;
+      max-width: 1000px;
     }
 
-    .art-card {
-      background: var(--white);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px var(--shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .art-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 18px var(--shadow);
-    }
-
-    .art-card img {
-      width: 100%;
-      height: 380px;
-      object-fit: cover;
-    }
-
-    .art-info {
-      padding: 1rem;
+    .gallery-item {
       text-align: center;
+      width: 300px;
     }
 
-    .art-info h3 {
-      margin: 0.5rem 0;
-      color: var(--gold);
-      font-size: 1.2rem;
+    .gallery-item img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease;
     }
 
-    .art-info p {
-      margin: 0;
+    .gallery-item img:hover {
+      transform: scale(1.05);
+    }
+
+    .caption {
+      margin-top: 10px;
+      color: #b69b4c;
+      font-weight: bold;
+    }
+
+    .artist {
       color: #555;
-      font-size: 0.95rem;
+      font-size: 0.9em;
     }
 
+    /* Popup (lightbox) style */
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .popup img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+    }
+
+    /* Footer style */
     footer {
       text-align: center;
-      padding: 2rem;
-      background: #fffaf0;
-      color: #777;
+      color: #b69b4c;
+      font-size: 14px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #fff;
+      padding: 10px 0;
       border-top: 1px solid #eee;
-      margin-top: 2rem;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
-
-  <style>
-.gallery {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 30px; /* space between images */
-  flex-wrap: wrap; /* allows wrapping on smaller screens */
-  margin-top: 30px;
-}
-.gallery-item {
-  text-align: center;
-}
-.gallery-item img {
-  width: 300px; /* adjust size */
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.caption {
-  margin-top: 8px;
-  color: #a08d54;
-  font-weight: bold;
-}
-</style>
-  
     }
   </style>
 </head>
 <body>
   <header>
     <h1>End Corruption Through Art</h1>
-    <p>A gallery where creativity exposes truth and art becomes a voice against corruption.</p>
+    <p class="subtitle">A gallery where creativity exposes truth and art becomes a voice against corruption.</p>
   </header>
 
-  <section class="gallery">
-    <div class="art-card">
-      <img src="1760402981076.jpeg" alt="Artwork 1">
-      <div class="art-info">
-        <h2>Float on Corruption</h2>
-        <h3>by J. Milo (2025) – Digital Artwork</h3>
-        <p>explanation</p>
-      </div>
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="1760402981076.jpeg" alt="Float on Corruption" onclick="openFull(this)">
+      <div class="caption">Float on Corruption</div>
+      <div class="artist">by J. Miko (2025) — Digital Artwork</div>
     </div>
 
-    <div class="art-card">
-      <img src="https://via.placeholder.com/400x600?text=Artwork+2" alt="Artwork 2">
-      <div class="art-info">
-        <h3>Voices of the People</h3>
-        <p>by M. Rivera (2023) – Acrylic</p>
-      </div>
+    <div class="gallery-item">
+      <img src="voices_of_the_people.jpg" alt="Voices of the People" onclick="openFull(this)">
+      <div class="caption">Voices of the People</div>
+      <div class="artist">by M. Rivera (2023) — Acrylic</div>
     </div>
+  </div>
 
-   <style>
-footer {
-  text-align: center;
-  color: #a08d54; /* goldish tone */
-  font-size: 14px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #fff; /* or your background color */
-  padding: 10px 0;
-  border-top: 1px solid #eee;
-}
-</style>
+  <!-- Popup Lightbox -->
+  <div id="popup" class="popup" onclick="closeFull()">
+    <img id="popupImg">
+  </div>
 
   <footer>
-    <p>© 2025 End Corruption Through Art – Promoting honesty and awareness through creativity.</p>
+    © 2025 End Corruption Through Art — Promoting honesty and awareness through creativity.
   </footer>
+
+  <script>
+    function openFull(img) {
+      document.getElementById("popup").style.display = "flex";
+      document.getElementById("popupImg").src = img.src;
+    }
+
+    function closeFull() {
+      document.getElementById("popup").style.display = "none";
+    }
+  </script>
 </body>
 </html>
