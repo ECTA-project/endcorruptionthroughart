@@ -12,6 +12,9 @@
     margin: 0;
     color: #333;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
   }
 
   /* Header */
@@ -53,7 +56,8 @@
     padding: 40px;
     scroll-behavior: smooth;
     cursor: grab;
-    justify-content: center;
+    justify-content: center; /* ✅ Centers artworks horizontally */
+    flex-wrap: wrap; /* ✅ Keeps artworks centered even if few */
   }
 
   .gallery-container.active {
@@ -113,6 +117,17 @@
     color: #444;
   }
 
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 15px 0;
+    background-color: #f5e6b3;
+    color: #6b4e16;
+    border-top: 2px solid #d4b04b;
+    font-size: 0.9em;
+    margin-top: auto; /* ✅ Pushes footer to bottom */
+  }
+
   /* Full image modal */
   .modal {
     display: none;
@@ -169,18 +184,24 @@
 <div class="gallery-container" id="gallery">
   <div class="artwork">
     <img src="1760402981076.jpeg" alt="Float on Corruption" onclick="openModal(this)">
-   <h2></h2> <div class="title">Float on Corruption</div></h2>
-    <h3></h3><div class="artist">by J. Milo (2025) — Digital Artwork</div></h3>
-    <p class="description">Artwork exposing the irony of wealth and corruption in daily life.We can observe in the artwork the reality of how our taxes are really being used. Instead of using them to make the country better, they take the money and use it for their own benefit.</p>
+    <div class="title">Float on Corruption</div>
+    <div class="artist">by J. Milo (2025) — Digital Artwork</div>
+    <p class="description">Artwork exposing the image of wealth and corruption in daily life. We can observe in the artwork the reality of how our taxes are really being used. Instead of using them to make the country better, they take the money and use it for their own benefit.
+      It illustrates the issue with the recent ongoing flood control projects. It symbolizes how our government leaders hide and use the allotted funds for government projects to gain power and flaunt their riches to the public. </p>
   </div>
 
   <div class="artwork">
     <img src="Untitled68_20251014103452.png" alt="Rooted in Greed" onclick="openModal(this)">
     <div class="title">Rooted in Greed</div>
-    <div class="artist">by J. Milo (2025) — Digital Artwork </div>
-    <p class="description">A cry for justice and awareness through powerful imagery. Illustrates the issue with the recent ongoing flood control projects. 
-      It symbolizes how our government leaders hide and use the allotted funds for government projects to gain power and flaunt their riches to the public.</p>
+    <div class="artist">by J. Milo (2025) — Digital Artwork</div>
+    <p class="description">A cry for justice and awareness through powerful imagery. The image references the popular movie: The Lorax. Where it also portrays corruption being rooted in the greed and selfishness of people. The Onceler, replaced by a certain government official, shows how they live comfortably from our labor and taxes while poverty and unemployment remains a glaring issue. 
+      Not only that, they continue to ignore the voices of the people and avoid accountability for their actions. </p>
   </div>
+</div>
+
+<footer>
+  © 2025 End Corruption Through Art — Promoting honesty and awareness through creativity.
+</footer>
 
 <!-- Full Image Modal -->
 <div id="imageModal" class="modal" onclick="closeModal()">
@@ -228,7 +249,7 @@
     if (!isDown) return;
     e.preventDefault();
     const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 2; // scroll speed
+    const walk = (x - startX) * 2;
     slider.scrollLeft = scrollLeft - walk;
   });
 </script>
