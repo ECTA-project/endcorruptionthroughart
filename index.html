@@ -1,259 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>End Corruption Through Art</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>End Corruption Through Art</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #fffdf5;
+      color: #333;
+      overflow-y: scroll;
+    }
 
-<style>
-  body {
-    font-family: "Georgia", serif;
-    background-color: #faf8f2;
-    margin: 0;
-    color: #333;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #fff9e6;
+      color: #b18f32;
+      text-align: center;
+      padding: 15px;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
 
-  /* Header */
-  header {
-    background-color: #f5e6b3;
-    color: #6b4e16;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 1.8em;
-    font-weight: bold;
-    letter-spacing: 1px;
-    border-bottom: 2px solid #d4b04b;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 100px;
+      padding-bottom: 80px;
+    }
 
-  header nav {
-    margin-top: 10px;
-  }
+    .artwork-row {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0;
+      flex-wrap: wrap;
+    }
 
-  header nav a {
-    text-decoration: none;
-    color: #6b4e16;
-    margin: 0 15px;
-    font-weight: bold;
-    font-size: 1em;
-  }
+    .artwork {
+      text-align: center;
+    }
 
-  header nav a:hover {
-    text-decoration: underline;
-  }
+    .artwork img {
+      width: 350px;
+      height: auto;
+      border: 5px solid #d4af37; /* ✨ Gold museum-style border */
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-  /* Gallery Section */
-  .gallery-container {
-    display: flex;
-    overflow-x: auto;
-    gap: 40px;
-    padding: 40px;
-    scroll-behavior: smooth;
-    cursor: grab;
-    justify-content: center; /* ✅ Centers artworks horizontally */
-    flex-wrap: wrap; /* ✅ Keeps artworks centered even if few */
-  }
+    .artwork img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
 
-  .gallery-container.active {
-    cursor: grabbing;
-  }
+    /* Make the second artwork display in original image size */
+    .artwork:nth-child(2) img {
+      width: auto;
+      max-width: 600px; /* adjust if your image is very large */
+      height: auto;
+    }
 
-  .gallery-container::-webkit-scrollbar {
-    height: 10px;
-  }
+    .artwork-name {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #5c4a1d;
+    }
 
-  .gallery-container::-webkit-scrollbar-thumb {
-    background-color: #c0a23a;
-    border-radius: 5px;
-  }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #fff9e6;
+      color: #b18f32;
+      font-size: 14px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      border-top: 1px solid #e0d6a8;
+    }
 
-  .artwork {
-    flex: 0 0 auto;
-    width: 350px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    padding: 15px;
-    text-align: center;
-    transition: transform 0.3s ease;
-  }
+    /* Modal (for image full view) */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999; /* ensures popup is above header */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.9);
+      animation: fadeIn 0.4s ease;
+    }
 
-  .artwork:hover {
-    transform: translateY(-5px);
-  }
+    .modal-content {
+      display: block;
+      margin: 5% auto;
+      max-width: 80%;
+      border: 8px solid #d4af37;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+    }
 
-  .artwork img {
-    width: 100%;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-  }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-  .artwork img:hover {
-    transform: scale(1.05);
-  }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 45px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-  .title {
-    color: #c0a23a;
-    font-weight: bold;
-    font-size: 1.2em;
-    margin-top: 10px;
-  }
+    .close:hover,
+    .close:focus {
+      color: #d4af37;
+      text-decoration: none;
+      cursor: pointer;
+    }
 
-  .artist {
-    font-style: italic;
-    color: #555;
-    margin-bottom: 5px;
-  }
-
-  p.description {
-    font-size: 0.95em;
-    color: #444;
-  }
-
-  /* Footer */
-  footer {
-    text-align: center;
-    padding: 15px 0;
-    background-color: #f5e6b3;
-    color: #6b4e16;
-    border-top: 2px solid #d4b04b;
-    font-size: 0.9em;
-    margin-top: auto; /* ✅ Pushes footer to bottom */
-  }
-
-  /* Full image modal */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.9);
-  }
-
-  .modal-content {
-    margin: auto;
-    display: block;
-    max-width: 80%;
-    border-radius: 10px;
-  }
-
-  .close {
-    position: absolute;
-    top: 25px;
-    right: 40px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .close:hover {
-    color: #ccc;
-  }
-</style>
+  </style>
 </head>
-
 <body>
+  <header>
+    End Corruption Through Art
+  </header>
 
-<header>
-  End Corruption Through Art
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Gallery</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
-  </nav>
-</header>
-
-<p style="text-align:center; margin-top:30px; font-size:1.1em;">
-  A gallery where creativity exposes truth and art becomes a voice against corruption.
-</p>
-
-<!-- Scrollable + Draggable Gallery -->
-<div class="gallery-container" id="gallery">
-  <div class="artwork">
-    <img src="1760402981076.jpeg" alt="Float on Corruption" onclick="openModal(this)">
-    <div class="title">Float on Corruption</div>
+  <div class="gallery">
+    <div class="artwork-row">
+      <div class="artwork">
+        <img src="1760402981076.jpeg" alt="Artwork 1" onclick="openModal(this)" />
+        <div class="artwork-name">"Float on Corruption"</div>
     <div class="artist">by J. Milo (2025) — Digital Artwork</div>
-    <p class="description">Artwork exposing the image of wealth and corruption in daily life. We can observe in the artwork the reality of how our taxes are really being used. Instead of using them to make the country better, they take the money and use it for their own benefit.
-      It illustrates the issue with the recent ongoing flood control projects. It symbolizes how our government leaders hide and use the allotted funds for government projects to gain power and flaunt their riches to the public. </p>
+    <p class="description">Artwork exposing the image of wealth and corruption in daily life.</p>
+  </div>
+      </div>
+      <div class="artwork">
+        <img src="Untitled68_20251014103452.png" alt="Artwork 2" onclick="openModal(this)" />
+        <div class="artwork-name">"Rooted in Greed"</div>
+    <div class="artist">by J. Milo (2025) — Digital Artwork</div>
+    <p class="description">Artwork exposing the image of wealth and corruption in daily life.</p>
+  </div>
+      </div>
+    </div>
   </div>
 
-  <div class="artwork">
-    <img src="Untitled68_20251014103452.png" alt="Rooted in Greed" onclick="openModal(this)">
-    <div class="title">Rooted in Greed</div>
-    <div class="artist">by J. Milo (2025) — Digital Artwork</div>
-    <p class="description">A cry for justice and awareness through powerful imagery. The image references the popular movie: The Lorax. Where it also portrays corruption being rooted in the greed and selfishness of people. The Onceler, replaced by a certain government official, shows how they live comfortably from our labor and taxes while poverty and unemployment remains a glaring issue. 
-      Not only that, they continue to ignore the voices of the people and avoid accountability for their actions. </p>
+  <footer>
+    © 2025 End Corruption Through Art — All rights reserved.
+  </footer>
+
+  <div id="imgModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImage" />
   </div>
-</div>
 
-<footer>
-  © 2025 End Corruption Through Art — Promoting honesty and awareness through creativity.
-</footer>
+  <script>
+    function openModal(img) {
+      var modal = document.getElementById("imgModal");
+      var modalImg = document.getElementById("modalImage");
+      modal.style.display = "block";
+      modalImg.src = img.src;
+    }
 
-<!-- Full Image Modal -->
-<div id="imageModal" class="modal" onclick="closeModal()">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="modalImg">
-</div>
-
-<script>
-  // Full image modal
-  function openModal(img) {
-    const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImg");
-    modal.style.display = "block";
-    modalImg.src = img.src;
-  }
-
-  function closeModal() {
-    document.getElementById("imageModal").style.display = "none";
-  }
-
-  // Drag to scroll functionality
-  const slider = document.getElementById("gallery");
-  let isDown = false;
-  let startX;
-  let scrollLeft;
-
-  slider.addEventListener("mousedown", (e) => {
-    isDown = true;
-    slider.classList.add("active");
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-  });
-
-  slider.addEventListener("mouseleave", () => {
-    isDown = false;
-    slider.classList.remove("active");
-  });
-
-  slider.addEventListener("mouseup", () => {
-    isDown = false;
-    slider.classList.remove("active");
-  });
-
-  slider.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 2;
-    slider.scrollLeft = scrollLeft - walk;
-  });
-</script>
-
+    function closeModal() {
+      document.getElementById("imgModal").style.display = "none";
+    }
+  </script>
 </body>
 </html>
 
